@@ -15,13 +15,13 @@ Page stories live in `src/stories/` (not `src/pages/`) so Astro does not treat t
    npm install
    ```
 
-3. Update GitHub Pages paths for your repo name — find/replace `devx-template` in:
-   - `astro.config.ts` (`base`)
-   - `.storybook/main.ts` (`viteFinal` → `config.base`)
+3. Update GitHub Pages paths for your repo name — find/replace `devx-template` in `astro.config.ts` (`base`) and `.storybook/main.ts` (Storybook production `config.base`).
 
 4. Enable **GitHub Pages** (Settings → Pages → Build and deployment → Source: **GitHub Actions**).
 
 ## Local development
+
+Locally the Astro site is served at `/` and Storybook at `http://localhost:6006/`. Production builds for GitHub Pages use the `/devx-template` base path (set via `GITHUB_PAGES=true` in CI).
 
 ```bash
 npm start          # Astro dev server

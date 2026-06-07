@@ -6,8 +6,10 @@ export default defineMain({
     name: '@storybook-astro/framework',
     options: {},
   },
-  viteFinal: async (config) => {
-    config.base = '/devx-template/storybook/';
+  viteFinal: async (config, { configType }) => {
+    if (configType === 'PRODUCTION') {
+      config.base = '/devx-template/storybook/';
+    }
     return config;
   },
 });

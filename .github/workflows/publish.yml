@@ -44,8 +44,12 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - run: npm run build
+        env:
+          GITHUB_PAGES: 'true'
 
       - run: npm run build-storybook
+        env:
+          GITHUB_PAGES: 'true'
 
       - run: mkdir -p dist/storybook && cp -r storybook-static/. dist/storybook/
 
