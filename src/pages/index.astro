@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Welcome from '../components/Welcome.astro';
+---
+
+<Layout title="My Project">
+  <main>
+    <h1>My Project</h1>
+    <p>Starter site from the devx-template repository.</p>
+    <Welcome name="devx-template" />
+  </main>
+</Layout>
+
+<style>
+  main {
+    display: grid;
+    gap: 1rem;
+  }
+</style>
