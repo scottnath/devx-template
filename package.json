@@ -9,10 +9,12 @@
     "preview": "astro preview",
     "typecheck": "astro check",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "sync:atproto": "npx tsx node_modules/@scottnath/devx/scripts/sync-to-atproto.ts",
+    "sync:atproto:dry-run": "npx tsx node_modules/@scottnath/devx/scripts/sync-to-atproto.ts --dry-run"
   },
   "devDependencies": {
-    "@scottnath/devx": "^1.0.8",
+    "@scottnath/devx": "^1.1.0",
     "typescript": "^6.0.3"
   },
   "engines": {

@@ -7,6 +7,7 @@ on:
       - 'src/**'
       - 'public/**'
       - 'astro.config.ts'
+      - 'atproto.config.ts'
       - '.storybook/**'
       - 'package.json'
       - 'package-lock.json'
@@ -23,7 +24,53 @@ permissions:
   id-token: write
 
 jobs:
+  atproto-sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: read
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          registry-url: https://npm.pkg.github.com
+          scope: '@scottnath'
+
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Sync blog to ATProto
+        env:
+          ATPROTO_APP_PASSWORD: ${{ secrets.ATPROTO_APP_PASSWORD }}
+          ATP_IDENTIFIER: ${{ secrets.ATP_IDENTIFIER }}
+          BLUESKY_CROSSPOST: ${{ vars.BLUESKY_CROSSPOST }}
+        run: |
+          if [ -z "$ATPROTO_APP_PASSWORD" ]; then
+            echo "Skipping ATProto sync (ATPROTO_APP_PASSWORD not configured)"
+            exit 0
+          fi
+          npm run sync:atproto
+
+      - name: Commit sync state
+        env:
+          ATPROTO_APP_PASSWORD: ${{ secrets.ATPROTO_APP_PASSWORD }}
+        run: |
+          if [ -z "$ATPROTO_APP_PASSWORD" ]; then
+            echo "Skipping ATProto state commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add atproto-state.json atproto-syndication.json public/.well-known/site.standard.publication src/content/blog 2>/dev/null || true
+          git diff --staged --quiet || git commit -m "🔄 Sync ATProto state [skip ci]"
+          git push
+
   build:
+    needs: atproto-sync
     runs-on: ubuntu-latest
     permissions:
       contents: read
