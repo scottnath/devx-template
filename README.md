@@ -51,9 +51,14 @@ Published URLs for this template repo:
 
 ## AT Protocol (optional)
 
-Workflow A scaffolding for [standard.site](https://standard.site/) publishing. See the [devx atproto docs](https://github.com/scottnath/devx/blob/main/docs/atproto.md) for setup, sync commands, and CI secrets.
+[standard.site](https://standard.site/) blog publishing via `snath-devx atproto sync`. See the [devx atproto docs](https://github.com/scottnath/devx/blob/main/docs/atproto.md) for setup, credentials, and CI secrets.
 
-Template-specific files: `atproto.config.ts`, `src/content.config.ts`, `src/layouts/BlogPost.astro`, `src/components/BlogComments.astro`.
+Template files: `atproto.config.ts`, `src/content.config.ts`, `src/layouts/BlogPost.astro`, `src/components/BlogComments.astro`.
+
+```bash
+npm run sync:atproto:dry-run
+npm run sync:atproto
+```
 
 ## Commits
 
