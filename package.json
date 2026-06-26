@@ -14,7 +14,7 @@
     "sync:atproto:dry-run": "snath-devx atproto sync --dry-run"
   },
   "devDependencies": {
-    "@scottnath/devx": "^1.1.4",
+    "@scottnath/devx": "^1.2.0",
     "typescript": "^6.0.3"
   },
   "engines": {
