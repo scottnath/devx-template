@@ -15,6 +15,7 @@ const blog = defineCollection({
     atprotoRkey: z.string().optional(),
     bskyPostUri: z.string().optional(),
     crosspost: z.boolean().optional(),
+    ogImage: z.string().optional(),
   }),
 });
 
