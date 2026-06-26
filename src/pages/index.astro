@@ -1,11 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Welcome from '../components/Welcome.astro';
+import { seoConfig } from '../../utils/seoConfig';
 ---
 
-<Layout title="My Project">
+<Layout title="devx-template" description={seoConfig.description}>
   <main>
-    <h1>My Project</h1>
+    <h1>devx-template</h1>
     <p>Starter site from the devx-template repository.</p>
     <Welcome name="devx-template" />
   </main>
